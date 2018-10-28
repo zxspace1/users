@@ -14,6 +14,9 @@ class Users extends Component {
 
     addUser = (e) => {
         e.preventDefault();
+        if (this.validate(this.inputName)) {
+
+        
 
         let newUser = {
             key: Date.now(),
@@ -23,11 +26,27 @@ class Users extends Component {
         this.setState( (prevState) => {
             return({
                 usersList: prevState.usersList.concat(newUser),
+                errorMsg: "",
             })
         })
 
         this.inputName.value = "";
+    } else {
+        this.setState ({
+            errorMsg: "Enter name!!",
+        });
     }
+}
+    
+
+    validate = (item) => {
+        if (item.value === "") {
+            return false;
+            } else {
+            return true;
+            }
+        }
+    
 
     removeUser = (userKey) => {
 
@@ -49,9 +68,12 @@ class Users extends Component {
                     type="text" placeholder="Enter name"/>
                     <button type="submit"> Add user </button>
                 </form>
+                <div className="error-msg">{this.state.errorMsg}</div>
                 <UsersList removeUser={this.removeUser} usersList=
                 {this.state.usersList} />
+                
             </div>
+
         )
     }
 }

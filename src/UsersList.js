@@ -5,8 +5,10 @@ class UserList extends Component {
 
     createUser = (user) => {
         return(
-            <li key={user.key} onClick = {() => {this.removeUser(user.key)} }>
-            {user.userName}</li>
+            <li >
+            {user.userName} <button key={user.key}
+            onClick = {() => {this.removeUser(user.key)} }
+            >Usuń</button> </li>
         )
     }
 
