@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UsersList from "./UsersList";
 
 class Users extends Component {
 
@@ -28,16 +29,28 @@ class Users extends Component {
         this.inputName.value = "";
     }
 
+    removeUser = (userKey) => {
+
+        let filteredUsers = this.state.usersList.filter( (user) =>user.key
+        !== userKey);
+
+        this.setState({
+            usersList: filteredUsers,
+        });
+    }
+
     render() {
         return(
             <div className="users-main">
-                <h1>Users list</h1>
+                <h1>User's List</h1>
                 
                 <form onSubmit = {this.addUser}>
                     <input ref={(data) => this.inputName = data} 
                     type="text" placeholder="Enter name"/>
                     <button type="submit"> Add user </button>
                 </form>
+                <UsersList removeUser={this.removeUser} usersList=
+                {this.state.usersList} />
             </div>
         )
     }
